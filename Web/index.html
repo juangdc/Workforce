@@ -1,0 +1,75 @@
+ <html>
+<style>
+    { margin: 0; padding: 0; }
+
+    html { 
+        background: url('Fondo.png') no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    input[type=text], select {
+            text-align: center;
+                font-weight: bold;
+    position: absolute;
+    top: 300px;
+    right: 600px;
+    width: 200px;
+    height: 50;  
+        font-size:18px;
+
+    background-color: rgb(59, 65, 72);
+    color: rgb(103, 108, 113);
+    padding: 12px 20px;
+    border: 1px solid  rgb(59, 65, 72);
+    border-radius: 4px;
+}
+input[type="password"] {
+      text-align: center;
+            font-weight: bold;
+    position: absolute;
+    top: 360px;
+    right: 600px;
+    width: 200px;
+    height: 50;
+    color: rgb(103, 108, 113);
+    background-color: rgb(59, 65, 72);
+    font:small-caption;
+    font-size:20px
+    margin: 8px 0;
+    border: 1px solid  rgb(59, 65, 72);
+    border-radius: 4px;
+}
+input[type=submit] {
+    position: absolute;
+    top: 425px;
+    right: 600px;
+    width: 200px;
+    height: 50; 
+    background-color: rgb(234, 76, 136);
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+
+</style>
+
+<body>
+    <div>
+  <form action="/action_page.php">
+    <input type="text" id="uname" name="uname" placeholder="Username">
+    <input type="password" id="psw" name="psw" placeholder="Password">
+    <input type="submit" value="Login">
+  </form>
+</div>
+
+</body>
+</html>
