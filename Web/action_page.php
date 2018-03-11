@@ -1,5 +1,5 @@
 <?php
-$mysqli = new mysqli("localhost", "*********", "*********", "***********");
+$mysqli = new mysqli("localhost", "id4898307_admin", "HardPassword", "id4898307_workforce");
 
 if (mysqli_connect_errno()) {
     exit();
@@ -17,7 +17,7 @@ if ($sentencia = $mysqli->prepare("SELECT Usuario.correo, Usuario.contraseña FR
     $sentencia->close();
    if ( $correo==$_GET['uname']  ) {
       // echo "Inicio de sesión correcto";
-        header('Location: webWorkforce.html');
+        header('Location: interno.html');
         $mysqli->close();
         exit;
     }else{
