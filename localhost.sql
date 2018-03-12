@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 12-03-2018 a las 08:45:53
+-- Tiempo de generación: 12-03-2018 a las 09:41:46
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.0.26
 
@@ -41,7 +41,8 @@ CREATE TABLE `Categoria` (
 
 INSERT INTO `Categoria` (`id`, `nombre`) VALUES
 (1, 'maquinista'),
-(2, 'mecanico');
+(2, 'mecanico'),
+(3, 'train reception');
 
 -- --------------------------------------------------------
 
@@ -96,21 +97,22 @@ CREATE TABLE `Empleado` (
   `salario` int(11) NOT NULL,
   `km` int(11) NOT NULL,
   `id_categoria` int(11) NOT NULL,
-  `id_estacion_base` int(11) NOT NULL,
+  `id_estacion_base` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
   `id_jornada_laboral` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL
+  `id_usuario` int(11) NOT NULL,
+  `foto` varchar(40) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `Empleado`
 --
 
-INSERT INTO `Empleado` (`DNI`, `nombre`, `apellido1`, `apellido2`, `salario`, `km`, `id_categoria`, `id_estacion_base`, `id_jornada_laboral`, `id_usuario`) VALUES
-('11111111a', 'juan', 'garcia', NULL, 5400, 54000, 1, 0, 0, 1),
-('22222222b', 'cristina ', 'garcia', NULL, 5400, 40000, 1, 0, 0, 2),
-('33333333c', 'rocio', 'gonzalez', NULL, 5400, 40000, 1, 0, 0, 3),
-('44444444d', 'alejandro', 'esquivias', NULL, 3000, 0, 2, 0, 0, 4),
-('55555555d', 'fernando', 'magdalena', NULL, 3000, 0, 2, 0, 0, 5);
+INSERT INTO `Empleado` (`DNI`, `nombre`, `apellido1`, `apellido2`, `salario`, `km`, `id_categoria`, `id_estacion_base`, `id_jornada_laboral`, `id_usuario`, `foto`) VALUES
+('11111111a', 'juan', 'garcia', NULL, 5400, 54000, 1, 'MAD', 0, 1, '/images/page2_img2.jpg'),
+('22222222b', 'cristina ', 'garcia', NULL, 5400, 40000, 1, 'VAL', 0, 2, ''),
+('33333333c', 'rocio', 'gonzalez', NULL, 5400, 40000, 1, 'VALL', 0, 3, ''),
+('44444444d', 'alejandro', 'esquivias', NULL, 3000, 0, 2, 'ALI', 0, 4, ''),
+('55555555d', 'fernando', 'magdalena', NULL, 3000, 0, 2, 'LEO', 0, 5, '');
 
 -- --------------------------------------------------------
 
@@ -119,7 +121,7 @@ INSERT INTO `Empleado` (`DNI`, `nombre`, `apellido1`, `apellido2`, `salario`, `k
 --
 
 CREATE TABLE `Estacion_base` (
-  `id` int(11) NOT NULL,
+  `id` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
   `nombre` varchar(30) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -128,7 +130,18 @@ CREATE TABLE `Estacion_base` (
 --
 
 INSERT INTO `Estacion_base` (`id`, `nombre`) VALUES
-(0, 'marid');
+('0', 'marid'),
+('ALI', 'alicante'),
+('BAR', 'barcelona '),
+('BIL', 'bilbao'),
+('LEO', 'leon'),
+('MAD', 'madrid'),
+('MAL', 'malaga'),
+('MUR', 'murcia'),
+('PAM', 'pamplona'),
+('SEV', 'sevilla'),
+('VAL', 'valencia'),
+('VALL', 'valladolid');
 
 -- --------------------------------------------------------
 
@@ -183,16 +196,17 @@ CREATE TABLE `Tarea` (
   `descripción` varchar(80) COLLATE utf8_unicode_ci DEFAULT NULL,
   `hora_comienzo` datetime NOT NULL,
   `hora_completada` datetime NOT NULL,
-  `codigo_viaje` int(11) NOT NULL
+  `codigo_viaje` int(11) NOT NULL,
+  `estado` varchar(20) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `Tarea`
 --
 
-INSERT INTO `Tarea` (`id`, `nombre`, `tipo`, `descripción`, `hora_comienzo`, `hora_completada`, `codigo_viaje`) VALUES
-(1, 'conducir tren madrid', 'conducir', 'conducir el tran 4', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
-(2, 'arreglar ruedas', 'arreglar', 'arreglar ruedas del tren 14', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0);
+INSERT INTO `Tarea` (`id`, `nombre`, `tipo`, `descripción`, `hora_comienzo`, `hora_completada`, `codigo_viaje`, `estado`) VALUES
+(1, 'conducir tren madrid', 'conducir', 'conducir el tren 4', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'realizada'),
+(2, 'arreglar ruedas', 'arreglar', 'arreglar ruedas del tren 14', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'cancelada');
 
 -- --------------------------------------------------------
 
@@ -288,9 +302,9 @@ ALTER TABLE `Cursos`
 ALTER TABLE `Empleado`
   ADD PRIMARY KEY (`DNI`),
   ADD KEY `id_categoria` (`id_categoria`),
-  ADD KEY `id_estacion_base` (`id_estacion_base`),
   ADD KEY `id_jornada_laboral` (`id_jornada_laboral`),
-  ADD KEY `id_usuario` (`id_usuario`);
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_estacion_base` (`id_estacion_base`);
 
 --
 -- Indices de la tabla `Estacion_base`
@@ -354,9 +368,9 @@ ALTER TABLE `Cursa`
 --
 ALTER TABLE `Empleado`
   ADD CONSTRAINT `Empleado_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `Categoria` (`id`),
-  ADD CONSTRAINT `Empleado_ibfk_2` FOREIGN KEY (`id_estacion_base`) REFERENCES `Estacion_base` (`id`),
   ADD CONSTRAINT `Empleado_ibfk_3` FOREIGN KEY (`id_jornada_laboral`) REFERENCES `Jornada_laboral` (`id`),
-  ADD CONSTRAINT `Empleado_ibfk_4` FOREIGN KEY (`id_usuario`) REFERENCES `Usuario` (`id`);
+  ADD CONSTRAINT `Empleado_ibfk_4` FOREIGN KEY (`id_usuario`) REFERENCES `Usuario` (`id`),
+  ADD CONSTRAINT `Empleado_ibfk_5` FOREIGN KEY (`id_estacion_base`) REFERENCES `Estacion_base` (`id`);
 
 --
 -- Filtros para la tabla `Solicitud`
