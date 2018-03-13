@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 12-03-2018 a las 09:41:46
+-- Tiempo de generación: 13-03-2018 a las 16:31:50
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.0.26
 
@@ -61,7 +61,9 @@ CREATE TABLE `Cursa` (
 --
 
 INSERT INTO `Cursa` (`fecha`, `id_cursos`, `DNI_empleado`) VALUES
-('2018-04-20 00:00:00', 0, '22222222b');
+('2018-04-20 00:00:00', 0, '22222222b'),
+('2018-05-10 08:00:00', 1, '44444444d'),
+('2018-05-03 14:00:00', 2, '22222222b');
 
 -- --------------------------------------------------------
 
@@ -81,7 +83,9 @@ CREATE TABLE `Cursos` (
 --
 
 INSERT INTO `Cursos` (`id`, `nombre`, `estado`, `codigo_tren`) VALUES
-(0, 'tren alta velocidad', 'completado', 12);
+(0, 'tren alta velocidad', 'completado', 12),
+(1, 'limpieza de trenes', 'realizado', 0),
+(2, 'trenes de velocidad media', 'realizado', 12);
 
 -- --------------------------------------------------------
 
@@ -130,7 +134,6 @@ CREATE TABLE `Estacion_base` (
 --
 
 INSERT INTO `Estacion_base` (`id`, `nombre`) VALUES
-('0', 'marid'),
 ('ALI', 'alicante'),
 ('BAR', 'barcelona '),
 ('BIL', 'bilbao'),
@@ -206,7 +209,9 @@ CREATE TABLE `Tarea` (
 
 INSERT INTO `Tarea` (`id`, `nombre`, `tipo`, `descripción`, `hora_comienzo`, `hora_completada`, `codigo_viaje`, `estado`) VALUES
 (1, 'conducir tren madrid', 'conducir', 'conducir el tren 4', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'realizada'),
-(2, 'arreglar ruedas', 'arreglar', 'arreglar ruedas del tren 14', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'cancelada');
+(2, 'arreglar ruedas', 'arreglar', 'arreglar ruedas del tren 14', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'cancelada'),
+(3, 'arreglar calefacción', 'reparacion', 'la calefacción no se enciende', '2018-04-12 09:00:00', '2018-04-12 15:00:00', 0, 'a realizar'),
+(4, 'conducir tren madrid', 'conducir', 'conducir el tren a madrid', '2018-03-15 07:00:00', '2018-03-15 12:00:00', 2, 'a realizar');
 
 -- --------------------------------------------------------
 
@@ -226,10 +231,12 @@ CREATE TABLE `TieneAsignada` (
 
 INSERT INTO `TieneAsignada` (`DNI`, `fecha`, `id`) VALUES
 ('11111111a', '2018-03-30 00:00:00', 1),
+('11111111a', '2018-03-14 06:00:00', 4),
 ('22222222b', '2018-04-18 00:00:00', 1),
 ('33333333c', '2018-04-18 00:00:00', 1),
 ('44444444d', '2018-03-21 00:00:00', 2),
-('55555555d', '2018-03-31 00:00:00', 2);
+('55555555d', '2018-03-31 00:00:00', 2),
+('55555555d', '2018-03-15 14:00:00', 3);
 
 -- --------------------------------------------------------
 
@@ -240,7 +247,7 @@ INSERT INTO `TieneAsignada` (`DNI`, `fecha`, `id`) VALUES
 CREATE TABLE `Usuario` (
   `id` int(11) NOT NULL,
   `correo` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `contraseña` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `contraseña` varchar(2000) COLLATE utf8_unicode_ci DEFAULT NULL,
   `DNI_usuario` varchar(10) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -249,11 +256,11 @@ CREATE TABLE `Usuario` (
 --
 
 INSERT INTO `Usuario` (`id`, `correo`, `contraseña`, `DNI_usuario`) VALUES
-(1, 'juan@correo.es', 'contraseñajuan', '11111111a'),
-(2, 'cristina@correo.es', 'contraseñacristina', '22222222b'),
-(3, 'rocio@correo.es', 'contraseñarocio', '33333333c'),
-(4, 'alejandro@correo.es', 'contraseñaalejandro', '44444444d'),
-(5, 'fernando@correo.es', 'contraseñafernando', '55555555d');
+(1, 'juan@correo.es', '$2y$10$FlPvMkpU7zpGGMVl/.LrIeGiDIdBY7GsCvdpLTIq04GN2yQ86G78u', '11111111a'),
+(2, 'cristina@correo.es', '*D13AC1E66A9084C1CBC4DA408172A8215F73625B', '22222222b'),
+(3, 'rocio@correo.es', '*305CF668E4A82DB0AA2108B81A6486BACC93C082', '33333333c'),
+(4, 'alejandro@correo.es', '*5AFD6AFDD511C1057208F8D88C2527FAD9DF25D7', '44444444d'),
+(5, 'fernando@correo.es', '*43876E558C63744490C037FF43570764FCC3FB90', '55555555d');
 
 -- --------------------------------------------------------
 
@@ -271,7 +278,9 @@ CREATE TABLE `Viaje` (
 --
 
 INSERT INTO `Viaje` (`codigo`, `estado`) VALUES
-(0, 'en estacion ');
+(0, 'en estacion '),
+(1, 'de camino'),
+(2, 'en la estacion');
 
 --
 -- Índices para tablas volcadas
