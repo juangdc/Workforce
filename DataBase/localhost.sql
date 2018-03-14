@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 13-03-2018 a las 16:31:50
+-- Tiempo de generación: 14-03-2018 a las 11:23:21
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.0.26
 
@@ -63,6 +63,7 @@ CREATE TABLE `Cursa` (
 INSERT INTO `Cursa` (`fecha`, `id_cursos`, `DNI_empleado`) VALUES
 ('2018-04-20 00:00:00', 0, '22222222b'),
 ('2018-05-10 08:00:00', 1, '44444444d'),
+('2018-04-11 10:00:00', 1, '66666666f'),
 ('2018-05-03 14:00:00', 2, '22222222b');
 
 -- --------------------------------------------------------
@@ -74,7 +75,6 @@ INSERT INTO `Cursa` (`fecha`, `id_cursos`, `DNI_empleado`) VALUES
 CREATE TABLE `Cursos` (
   `id` int(11) NOT NULL,
   `nombre` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `estado` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `codigo_tren` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -82,10 +82,10 @@ CREATE TABLE `Cursos` (
 -- Volcado de datos para la tabla `Cursos`
 --
 
-INSERT INTO `Cursos` (`id`, `nombre`, `estado`, `codigo_tren`) VALUES
-(0, 'tren alta velocidad', 'completado', 12),
-(1, 'limpieza de trenes', 'realizado', 0),
-(2, 'trenes de velocidad media', 'realizado', 12);
+INSERT INTO `Cursos` (`id`, `nombre`, `codigo_tren`) VALUES
+(0, 'tren alta velocidad', 12),
+(1, 'limpieza de trenes', 0),
+(2, 'trenes de velocidad media', 12);
 
 -- --------------------------------------------------------
 
@@ -103,7 +103,6 @@ CREATE TABLE `Empleado` (
   `id_categoria` int(11) NOT NULL,
   `id_estacion_base` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
   `id_jornada_laboral` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
   `foto` varchar(40) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -111,12 +110,13 @@ CREATE TABLE `Empleado` (
 -- Volcado de datos para la tabla `Empleado`
 --
 
-INSERT INTO `Empleado` (`DNI`, `nombre`, `apellido1`, `apellido2`, `salario`, `km`, `id_categoria`, `id_estacion_base`, `id_jornada_laboral`, `id_usuario`, `foto`) VALUES
-('11111111a', 'juan', 'garcia', NULL, 5400, 54000, 1, 'MAD', 0, 1, '/images/page2_img2.jpg'),
-('22222222b', 'cristina ', 'garcia', NULL, 5400, 40000, 1, 'VAL', 0, 2, ''),
-('33333333c', 'rocio', 'gonzalez', NULL, 5400, 40000, 1, 'VALL', 0, 3, ''),
-('44444444d', 'alejandro', 'esquivias', NULL, 3000, 0, 2, 'ALI', 0, 4, ''),
-('55555555d', 'fernando', 'magdalena', NULL, 3000, 0, 2, 'LEO', 0, 5, '');
+INSERT INTO `Empleado` (`DNI`, `nombre`, `apellido1`, `apellido2`, `salario`, `km`, `id_categoria`, `id_estacion_base`, `id_jornada_laboral`, `foto`) VALUES
+('11111111a', 'juan', 'garcia', NULL, 5400, 54000, 1, 'MAD', 0, '/images/page2_img2.jpg'),
+('22222222b', 'cristina ', 'garcia', NULL, 5400, 40000, 1, 'VAL', 0, ''),
+('33333333c', 'rocio', 'gonzalez', NULL, 5400, 40000, 1, 'VALL', 0, ''),
+('44444444d', 'alejandro', 'esquivias', NULL, 3000, 0, 2, 'ALI', 0, ''),
+('55555555d', 'fernando', 'magdalena', NULL, 3000, 0, 2, 'LEO', 0, ''),
+('66666666f', 'pedro', 'alvarez', 'alvarez', 3000, 100, 3, 'MAD', 2, '');
 
 -- --------------------------------------------------------
 
@@ -163,7 +163,9 @@ CREATE TABLE `Jornada_laboral` (
 --
 
 INSERT INTO `Jornada_laboral` (`id`, `hora_entrada`, `hora_salida`) VALUES
-(0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(1, '2018-04-26 09:00:00', '2018-04-26 12:00:00'),
+(2, '2018-03-22 12:00:00', '2018-03-22 19:00:00');
 
 -- --------------------------------------------------------
 
@@ -260,7 +262,8 @@ INSERT INTO `Usuario` (`id`, `correo`, `contraseña`, `DNI_usuario`) VALUES
 (2, 'cristina@correo.es', '*D13AC1E66A9084C1CBC4DA408172A8215F73625B', '22222222b'),
 (3, 'rocio@correo.es', '*305CF668E4A82DB0AA2108B81A6486BACC93C082', '33333333c'),
 (4, 'alejandro@correo.es', '*5AFD6AFDD511C1057208F8D88C2527FAD9DF25D7', '44444444d'),
-(5, 'fernando@correo.es', '*43876E558C63744490C037FF43570764FCC3FB90', '55555555d');
+(5, 'fernando@correo.es', '*43876E558C63744490C037FF43570764FCC3FB90', '55555555d'),
+(6, 'pedroalvarez@correo.es', 'contraseñapedro', '66666666f');
 
 -- --------------------------------------------------------
 
@@ -312,7 +315,6 @@ ALTER TABLE `Empleado`
   ADD PRIMARY KEY (`DNI`),
   ADD KEY `id_categoria` (`id_categoria`),
   ADD KEY `id_jornada_laboral` (`id_jornada_laboral`),
-  ADD KEY `id_usuario` (`id_usuario`),
   ADD KEY `id_estacion_base` (`id_estacion_base`);
 
 --
@@ -378,7 +380,6 @@ ALTER TABLE `Cursa`
 ALTER TABLE `Empleado`
   ADD CONSTRAINT `Empleado_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `Categoria` (`id`),
   ADD CONSTRAINT `Empleado_ibfk_3` FOREIGN KEY (`id_jornada_laboral`) REFERENCES `Jornada_laboral` (`id`),
-  ADD CONSTRAINT `Empleado_ibfk_4` FOREIGN KEY (`id_usuario`) REFERENCES `Usuario` (`id`),
   ADD CONSTRAINT `Empleado_ibfk_5` FOREIGN KEY (`id_estacion_base`) REFERENCES `Estacion_base` (`id`);
 
 --
