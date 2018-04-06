@@ -89,35 +89,35 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
             <div class="fa fa-cog"></div>Configuración</div>
           </a>
           <a href="#" class="banner "><div class="maxheight1">
-            <div class="fa fa-briefcase"></div>Tareas</div>
+            <div class="fa fa-briefcase"></div>Notificaciones</div>
           </a>
          </div>
         <div class="grid_4">
         <a href="profile.php" class="banner "><div class="maxheight">
-            <div class="fa fa-globe"></div>Mi perfil</div>
+            <div class="fa fa-globe"></div>Tareas</div>
           </a>
           <a href="#" class="banner "><div class="maxheight">
-            <div class="fa fa-lightbulb-o"></div>Solicitudes</div>
+            <div class="fa fa-lightbulb-o"></div>Noticias</div>
           </a>
           <a href="#" class="banner "><div class="maxheight1">
-            <div class="fa fa-cog"></div>Configuración</div>
+            <div class="fa fa-briefcase"></div>Solicitudes</div>
           </a>
-          <a href="#" class="banner "><div class="maxheight1">
-            <div class="fa fa-briefcase"></div>Tareas</div>
+           <a href="#" class="banner "><div class="maxheight1">
+            <div class=""></div></div>
           </a>
          </div>
          <div class="grid_4">
          <a href="profile.php" class="banner "><div class="maxheight">
-            <div class="fa fa-globe"></div>Mi perfil</div>
+            <div class="fa fa-globe"></div>Promociones</div>
           </a>
           <a href="#" class="banner "><div class="maxheight">
-            <div class="fa fa-lightbulb-o"></div>Solicitudes</div>
+            <div class="fa fa-lightbulb-o"></div>Mi historial</div>
           </a>
           <a href="#" class="banner "><div class="maxheight1">
-            <div class="fa fa-cog"></div>Configuración</div>
+            <div class="fa fa-cog"></div>Ayuda</div>
           </a>
           <a href="#" class="banner "><div class="maxheight1">
-            <div class="fa fa-briefcase"></div>Tareas</div>
+            <div class="fa fa-briefcase"></div>Salir</div>
           </a>
          </div>
       </div>
