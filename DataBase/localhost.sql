@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 23-04-2018 a las 07:27:37
+-- Tiempo de generación: 16-05-2018 a las 10:23:31
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.0.26
 
@@ -63,10 +63,34 @@ CREATE TABLE `Cursa` (
 --
 
 INSERT INTO `Cursa` (`fecha`, `id_cursos`, `DNI_empleado`) VALUES
+('2018-05-09 08:25:00', 0, '11111111a'),
 ('2018-04-20 00:00:00', 0, '22222222b'),
+('2018-05-01 00:00:00', 1, '12345678a'),
+('2018-05-02 00:00:00', 1, '12345678b'),
+('2018-05-05 00:00:00', 1, '12345678u'),
 ('2018-05-10 08:00:00', 1, '44444444d'),
 ('2018-04-11 10:00:00', 1, '66666666f'),
+('2018-05-11 14:10:00', 1, '77777777'),
 ('2018-05-03 14:00:00', 2, '22222222b'),
+('2018-05-01 00:00:00', 3, '12345678a'),
+('2018-05-04 00:00:00', 3, '12345678d'),
+('2018-05-05 00:00:00', 3, '12345678u'),
+('2018-05-01 00:00:00', 4, '12345678a'),
+('2018-05-03 00:00:00', 4, '12345678c'),
+('2018-05-04 00:00:00', 4, '12345678d'),
+('2018-05-05 00:00:00', 4, '12345678u'),
+('2018-05-02 00:00:00', 5, '12345678b'),
+('2018-05-03 00:00:00', 5, '12345678c'),
+('2018-05-04 00:00:00', 5, '12345678d'),
+('2018-05-05 00:00:00', 5, '12345678u'),
+('2018-05-02 00:00:00', 6, '12345678b'),
+('2018-05-03 00:00:00', 6, '12345678c'),
+('2018-05-05 00:00:00', 6, '12345678u'),
+('2018-05-03 00:00:00', 7, '12345678c'),
+('2018-05-04 00:00:00', 7, '12345678d'),
+('2018-05-05 00:00:00', 7, '12345678u'),
+('2018-05-17 08:00:00', 8, '44444444d'),
+('2018-05-23 09:00:00', 8, '55555555d'),
 ('2018-04-26 05:00:25', 8, '99999999p'),
 ('2018-04-20 09:00:19', 9, '12345678u');
 
@@ -90,6 +114,11 @@ INSERT INTO `Cursos` (`id_cursos`, `nombre`, `codigo_tren`) VALUES
 (0, 'tren alta velocidad', 12),
 (1, 'limpieza de trenes', 0),
 (2, 'trenes de velocidad media', 12),
+(3, 'maniobras con asientos', 25),
+(4, 'limpieza con toxicos', 23),
+(5, 'limpieza a presion', 30),
+(6, 'manipulacion de alimentos', 40),
+(7, 'calibraje especial', 70),
 (8, 'limpieza', 4),
 (9, 'cocina en el tren', 3);
 
@@ -105,6 +134,7 @@ CREATE TABLE `Empleado` (
   `apellido1` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `apellido2` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `salario` int(11) NOT NULL,
+  `bonus` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `km` int(11) NOT NULL,
   `id_categoria` int(11) NOT NULL,
   `id_estacion_base` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
@@ -115,21 +145,21 @@ CREATE TABLE `Empleado` (
 -- Volcado de datos para la tabla `Empleado`
 --
 
-INSERT INTO `Empleado` (`DNI`, `nombre`, `apellido1`, `apellido2`, `salario`, `km`, `id_categoria`, `id_estacion_base`, `foto`) VALUES
-('11111111a', 'Juan', 'García de la cruz', 'García', 5400, 54000, 1, 'MAD', '/images/page2_img2.jpg'),
-('12121212', 'juan', 'mecanico', NULL, 3000, 0, 1, 'MAD', ''),
-('12345678a', 'Javier', 'Revuelta', 'Garcia', 0, 0, 3, 'BIL', ''),
-('12345678b', 'Irene', 'Garcia', 'Muñoz', 0, 0, 3, 'MUR', ''),
-('12345678c', 'Ana', 'Ibañez', 'Herrera', 0, 0, 5, 'MAD', ''),
-('12345678d', 'Sandra', 'Garcia', 'Ibañez', 0, 0, 3, 'SEV', ''),
-('12345678u', 'elena', 'alvarez', NULL, 4500, 6000, 4, 'LEO', ''),
-('22222222b', 'Cristina ', 'García', 'Sánchez-Poves', 5900, 40000, 5, 'VAL', '/images/page2_img3.jpg'),
-('33333333c', 'rocio', 'gonzalez', NULL, 5400, 40000, 1, 'VALL', ''),
-('44444444d', 'alejandro', 'esquivias', NULL, 3000, 0, 2, 'ALI', ''),
-('55555555d', 'fernando', 'magdalena', NULL, 3000, 0, 2, 'LEO', ''),
-('66666666f', 'pedro', 'alvarez', 'alvarez', 3000, 100, 3, 'MAD', ''),
-('77777777', 'pablo', 'alvarez', NULL, 3333, 400, 4, 'VAL', ''),
-('99999999p', 'marcos', 'perez', NULL, 6000, 0, 5, 'MUR', '');
+INSERT INTO `Empleado` (`DNI`, `nombre`, `apellido1`, `apellido2`, `salario`, `bonus`, `km`, `id_categoria`, `id_estacion_base`, `foto`) VALUES
+('11111111a', 'Juan', 'García de la cruz', 'García', 5400, '4%', 54000, 4, 'MAD', '/images/page2_img2.jpg'),
+('12121212', 'juan', 'mecanico', NULL, 3000, '3%', 0, 1, 'MAD', ''),
+('12345678a', 'Javier', 'Revuelta', 'Garcia', 0, '5%', 0, 3, 'MAD', ''),
+('12345678b', 'Irene', 'Garcia', 'Muñoz', 3000, '4%', 0, 3, 'MAD', ''),
+('12345678c', 'Ana', 'Ibañez', 'Herrera', 5000, '3%', 0, 3, 'MAD', ''),
+('12345678d', 'Sandra', 'Garcia', 'Ibañez', 3500, '5%', 0, 3, 'MAD', ''),
+('12345678u', 'elena', 'alvarez', 'alvarez', 4500, '4%', 6000, 3, 'MAD', ''),
+('22222222b', 'Cristina ', 'García', 'Sánchez-Poves', 5900, '3%', 40000, 5, 'MAD', '/images/page2_img3.jpg'),
+('33333333c', 'rocio', 'gonzalez', 'perez', 5400, '5%', 40000, 1, 'MAD', ''),
+('44444444d', 'alejandro', 'esquivias', 'fernandez', 3000, '4%', 0, 2, 'MAD', ''),
+('55555555d', 'fernando', 'magdalena', NULL, 3000, '3%', 0, 4, 'MAD', ''),
+('66666666f', 'pedro', 'alvarez', 'alvarez', 3000, '5%', 100, 5, 'MAD', ''),
+('77777777', 'pablo', 'alvarez', NULL, 3333, '4%', 400, 4, 'MAD', ''),
+('99999999p', 'marcos', 'perez', NULL, 6000, '3%', 0, 5, 'MAD', '');
 
 -- --------------------------------------------------------
 
@@ -177,10 +207,11 @@ CREATE TABLE `Jornada_empleado` (
 
 INSERT INTO `Jornada_empleado` (`DNI_empleado`, `id_jornada_laboral`, `id_jornada_empleado`) VALUES
 ('11111111a', 0, 1),
-('12345678a', 0, NULL),
-('12345678b', 0, NULL),
-('12345678c', 1, NULL),
-('12345678d', 1, NULL),
+('12345678a', 20, 20),
+('12345678b', 20, 21),
+('12345678c', 20, 22),
+('12345678d', 20, 23),
+('12345678u', 20, 24),
 ('22222222b', 0, 4),
 ('22222222b', 2, 2),
 ('55555555d', 0, NULL);
@@ -206,7 +237,8 @@ INSERT INTO `Jornada_laboral` (`id_jornada_laboral`, `hora_entrada`, `hora_salid
 (1, '2018-04-12 13:00:00', '2018-04-12 22:00:00'),
 (2, '2018-04-13 17:00:00', '2018-04-13 23:30:00'),
 (6, '2018-04-11 11:30:00', '2018-04-11 16:00:00'),
-(7, '2018-04-09 00:40:00', '2018-04-09 19:00:00');
+(7, '2018-04-09 00:40:00', '2018-04-09 19:00:00'),
+(20, '2018-04-08 12:00:00', '2018-04-08 18:00:00');
 
 -- --------------------------------------------------------
 
@@ -237,20 +269,26 @@ INSERT INTO `Solicitud` (`id_solicitud`, `tipo`, `estado`, `DNI_empleado`) VALUE
 
 CREATE TABLE `Tarea` (
   `id_tarea` int(11) NOT NULL,
-  `nombre` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL
+  `nombre` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `incidencias` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `Tarea`
 --
 
-INSERT INTO `Tarea` (`id_tarea`, `nombre`) VALUES
-(0, NULL),
-(1, 'conducir tren madrid'),
-(2, 'arreglar ruedas'),
-(3, 'arreglar calefacción'),
-(4, 'conducir tren madrid'),
-(6, 'tr');
+INSERT INTO `Tarea` (`id_tarea`, `nombre`, `incidencias`) VALUES
+(0, NULL, ''),
+(1, 'conducir tren madrid', ''),
+(2, 'arreglar ruedas', ''),
+(3, 'arreglar calefacción', ''),
+(4, 'conducir tren madrid', ''),
+(6, 'tr', ''),
+(8, 'dar la vuelta a asientos', ''),
+(9, 'limpieza de ventanas', ''),
+(10, 'reposicion de alimentos', ''),
+(11, 'calibracion de agujas', ''),
+(12, 'limpieza de suelos', '');
 
 -- --------------------------------------------------------
 
@@ -265,27 +303,35 @@ CREATE TABLE `TieneAsignada` (
   `descripcion` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `hora_completada` datetime NOT NULL,
   `codigo_viaje` int(11) NOT NULL,
-  `estado` varchar(20) COLLATE utf8_unicode_ci NOT NULL
+  `estado` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `id_tieneAsignada` int(11) NOT NULL,
+  `comentario` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `TieneAsignada`
 --
 
-INSERT INTO `TieneAsignada` (`DNI`, `hora_comienzo`, `id_tarea`, `descripcion`, `hora_completada`, `codigo_viaje`, `estado`) VALUES
-('11111111a', '2018-03-30 00:00:00', 1, '', '0000-00-00 00:00:00', 0, ''),
-('11111111a', '2018-03-14 06:00:00', 4, '', '0000-00-00 00:00:00', 0, ''),
-('12345678a', '2018-04-08 12:00:00', 1, '', '2018-04-08 13:00:00', 1, 'realizada'),
-('12345678b', '2018-04-08 12:00:00', 2, '', '2018-04-08 13:00:00', 123, 'realizada'),
-('12345678c', '2018-04-12 13:30:00', 0, '', '2018-04-12 16:00:00', 666, 'pendiente'),
-('12345678d', '2018-04-01 19:30:00', 3, '', '2018-04-12 21:00:00', 202, 'cancelada'),
-('12345678u', '2018-04-18 16:00:00', 2, '', '0000-00-00 00:00:00', 2, ''),
-('22222222b', '2018-04-18 00:00:00', 1, '', '0000-00-00 00:00:00', 1, ''),
-('33333333c', '2018-04-18 00:00:00', 1, '', '0000-00-00 00:00:00', 2, ''),
-('55555555d', '2018-03-31 00:00:00', 2, '', '0000-00-00 00:00:00', 2, ''),
-('55555555d', '2018-03-15 14:00:00', 3, '', '0000-00-00 00:00:00', 0, ''),
-('77777777', '2018-04-25 11:00:00', 6, '', '0000-00-00 00:00:00', 0, ''),
-('99999999p', '2018-04-18 00:45:44', 4, '', '0000-00-00 00:00:00', 1, '');
+INSERT INTO `TieneAsignada` (`DNI`, `hora_comienzo`, `id_tarea`, `descripcion`, `hora_completada`, `codigo_viaje`, `estado`, `id_tieneAsignada`, `comentario`) VALUES
+('11111111a', '2018-03-30 00:00:00', 1, '', '0000-00-00 00:00:00', 0, 'incompleta', 1, ''),
+('11111111a', '2018-03-14 06:00:00', 4, '', '0000-00-00 00:00:00', 0, 'pendiente', 2, ''),
+('22222222b', '2018-04-18 00:00:00', 1, '', '0000-00-00 00:00:00', 1, 'pendiente', 8, ''),
+('33333333c', '2018-04-18 00:00:00', 1, '', '0000-00-00 00:00:00', 2, 'cancelada', 9, ''),
+('55555555d', '2018-03-31 00:00:00', 2, '', '0000-00-00 00:00:00', 2, 'realizada', 10, ''),
+('55555555d', '2018-03-15 14:00:00', 3, '', '0000-00-00 00:00:00', 0, 'incompleta', 11, ''),
+('77777777', '2018-04-25 11:00:00', 6, '', '0000-00-00 00:00:00', 0, 'pendiente', 12, ''),
+('99999999p', '2018-04-18 00:45:44', 4, '', '0000-00-00 00:00:00', 1, 'incompleta', 13, ''),
+('11111111a', '2018-03-13 06:00:00', 4, '', '0000-00-00 00:00:00', 0, 'pendiente', 14, ''),
+('11111111a', '2018-04-14 18:00:00', 4, '', '0000-00-00 00:00:00', 0, 'incompleta', 15, ''),
+('11111111a', '2018-04-25 16:00:00', 4, '', '0000-00-00 00:00:00', 202, 'realizada', 16, ''),
+('12345678a', '2018-05-02 12:00:00', 8, '', '2018-05-02 15:00:00', 666, 'pendiente', 17, ''),
+('12345678a', '2018-05-16 09:00:00', 10, '', '2018-05-02 17:00:00', 202, 'realizada', 18, 'todo perfecto'),
+('12345678b', '2018-05-16 07:00:00', 11, '', '2018-05-16 11:00:00', 202, 'incompleta', 19, 'no tenia herramienta'),
+('12345678b', '2018-05-16 10:00:00', 12, '', '2018-05-16 13:00:00', 202, 'realizada', 20, 'todo perfecto'),
+('12345678c', '2018-05-17 10:00:00', 11, '', '2018-05-17 12:00:00', 2, 'cancelada', 21, ''),
+('12345678d', '2018-05-16 10:00:00', 9, '', '2018-05-16 13:00:00', 666, 'realizada', 22, ''),
+('12345678d', '2018-05-16 08:00:00', 11, '', '2018-05-16 13:00:00', 202, 'incompleta', 23, 'falta aceite'),
+('12345678u', '2018-05-17 07:00:00', 10, '', '2018-05-17 11:00:00', 666, 'pendiente', 24, '');
 
 -- --------------------------------------------------------
 
@@ -307,14 +353,43 @@ CREATE TABLE `Usuario` (
 INSERT INTO `Usuario` (`id_usuario`, `correo`, `contraseña`, `DNI_usuario`) VALUES
 (1, 'juan@correo.es', '$2y$10$FlPvMkpU7zpGGMVl/.LrIeGiDIdBY7GsCvdpLTIq04GN2yQ86G78u', '11111111a'),
 (2, 'cristina@correo.es', '$2y$10$wsvFmSp8e3/JIucpBajoOudzBBkyzrWHXf/jhwHZJcB6aBOgSBKoy', '22222222b'),
-(3, 'rocio@correo.es', '*305CF668E4A82DB0AA2108B81A6486BACC93C082', '33333333c'),
-(4, 'alejandro@correo.es', '*5AFD6AFDD511C1057208F8D88C2527FAD9DF25D7', '44444444d'),
-(5, 'fernando@correo.es', '*43876E558C63744490C037FF43570764FCC3FB90', '55555555d'),
-(6, 'pedroalvarez@correo.es', 'contraseñapedro', '66666666f'),
+(3, 'rocio@correo.es', '$2y$10$byAg7Kjw0VA8e1RO/MbJQe8i.KhfZkM/tKPk/1HxYq5PxBgyDvSsa', '33333333c'),
+(4, 'alejandro@correo.es', '$2y$10$sfrH9f3nZd9X2JI2Y9Urcuq71WooI9ahHOVONUU6qw6y2C8.qiUdm', '44444444d'),
+(5, 'fernando@correo.es', '$2y$10$hETIs9zlvZMnE1F1Zee1d.xsgLV/oIbZV9wj8alZBV0QYwt09zlTS', '55555555d'),
+(6, 'pedroalvarez@correo.es', '$2y$10$pdTlPpEMCWbTWJJNVhotguPgCxQ.jENpB2OjyHAel.WxSmgMtKO9G', '66666666f'),
 (7, 'pablo@correo.es', 'contraseñapablo', '77777777'),
 (9, 'marcos@correo.es', 'contraseñamarcos', '99999999p'),
 (11, 'elena@correo.es', 'contraseñaelena', '12345678u'),
 (15, 'JuanMecanico@correo.es', 'mantenimiento', '12121212');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Vacaciones`
+--
+
+CREATE TABLE `Vacaciones` (
+  `id_vacaciones` int(11) NOT NULL,
+  `empleado_DNI` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `inicio_vacaciones` datetime NOT NULL,
+  `fin_vacaciones` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `Vacaciones`
+--
+
+INSERT INTO `Vacaciones` (`id_vacaciones`, `empleado_DNI`, `inicio_vacaciones`, `fin_vacaciones`) VALUES
+(1, '11111111a', '2018-05-16 00:00:00', '2018-05-23 00:00:00'),
+(2, '12121212', '2018-05-23 00:00:00', '2018-05-30 00:00:00'),
+(3, '12345678a', '2018-05-30 00:00:00', '2018-06-06 00:00:00'),
+(4, '12345678b', '2018-06-06 00:00:00', '2018-06-13 00:00:00'),
+(5, '12345678c', '2018-06-13 00:00:00', '2018-06-20 00:00:00'),
+(6, '12345678d', '2018-06-20 00:00:00', '2018-06-27 00:00:00'),
+(7, '12345678u', '2018-06-27 00:00:00', '2018-07-04 00:00:00'),
+(8, '33333333c', '2018-07-04 00:00:00', '2018-07-11 00:00:00'),
+(9, '44444444d', '2018-07-11 00:00:00', '2018-07-18 00:00:00'),
+(10, '55555555d', '2018-07-18 00:00:00', '2018-07-25 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -406,9 +481,11 @@ ALTER TABLE `Tarea`
 -- Indices de la tabla `TieneAsignada`
 --
 ALTER TABLE `TieneAsignada`
-  ADD PRIMARY KEY (`DNI`,`id_tarea`),
-  ADD KEY `id` (`id_tarea`),
-  ADD KEY `codigo_viaje` (`codigo_viaje`);
+  ADD PRIMARY KEY (`id_tieneAsignada`),
+  ADD UNIQUE KEY `id_tieneAsignada` (`id_tieneAsignada`),
+  ADD KEY `codigo_viaje` (`codigo_viaje`),
+  ADD KEY `DNI` (`DNI`),
+  ADD KEY `id_tarea` (`id_tarea`);
 
 --
 -- Indices de la tabla `Usuario`
@@ -416,6 +493,13 @@ ALTER TABLE `TieneAsignada`
 ALTER TABLE `Usuario`
   ADD PRIMARY KEY (`id_usuario`),
   ADD KEY `DNI_usuario` (`DNI_usuario`);
+
+--
+-- Indices de la tabla `Vacaciones`
+--
+ALTER TABLE `Vacaciones`
+  ADD PRIMARY KEY (`id_vacaciones`),
+  ADD KEY `empleado_DNI` (`empleado_DNI`);
 
 --
 -- Indices de la tabla `Viaje`
@@ -458,15 +542,21 @@ ALTER TABLE `Solicitud`
 -- Filtros para la tabla `TieneAsignada`
 --
 ALTER TABLE `TieneAsignada`
-  ADD CONSTRAINT `TieneAsignada_ibfk_2` FOREIGN KEY (`DNI`) REFERENCES `Empleado` (`DNI`),
-  ADD CONSTRAINT `TieneAsignada_ibfk_3` FOREIGN KEY (`id_tarea`) REFERENCES `Tarea` (`id_tarea`),
-  ADD CONSTRAINT `TieneAsignada_ibfk_4` FOREIGN KEY (`codigo_viaje`) REFERENCES `Viaje` (`codigo`);
+  ADD CONSTRAINT `TieneAsignada_ibfk_4` FOREIGN KEY (`codigo_viaje`) REFERENCES `Viaje` (`codigo`),
+  ADD CONSTRAINT `TieneAsignada_ibfk_5` FOREIGN KEY (`DNI`) REFERENCES `Empleado` (`DNI`),
+  ADD CONSTRAINT `TieneAsignada_ibfk_6` FOREIGN KEY (`id_tarea`) REFERENCES `Tarea` (`id_tarea`);
 
 --
 -- Filtros para la tabla `Usuario`
 --
 ALTER TABLE `Usuario`
   ADD CONSTRAINT `Usuario_ibfk_1` FOREIGN KEY (`DNI_usuario`) REFERENCES `Empleado` (`DNI`);
+
+--
+-- Filtros para la tabla `Vacaciones`
+--
+ALTER TABLE `Vacaciones`
+  ADD CONSTRAINT `Vacaciones_ibfk_1` FOREIGN KEY (`empleado_DNI`) REFERENCES `Empleado` (`DNI`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
