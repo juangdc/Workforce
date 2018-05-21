@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 16-05-2018 a las 10:23:31
+-- Tiempo de generación: 21-05-2018 a las 08:08:51
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.0.26
 
@@ -146,16 +146,16 @@ CREATE TABLE `Empleado` (
 --
 
 INSERT INTO `Empleado` (`DNI`, `nombre`, `apellido1`, `apellido2`, `salario`, `bonus`, `km`, `id_categoria`, `id_estacion_base`, `foto`) VALUES
-('11111111a', 'Juan', 'García de la cruz', 'García', 5400, '4%', 54000, 4, 'MAD', '/images/page2_img2.jpg'),
+('11111111a', 'Juan', 'García de la cruz', 'García', 5400, '0.4', 54000, 4, 'MAD', '/images/page2_img2.jpg'),
 ('12121212', 'juan', 'mecanico', NULL, 3000, '3%', 0, 1, 'MAD', ''),
 ('12345678a', 'Javier', 'Revuelta', 'Garcia', 0, '5%', 0, 3, 'MAD', ''),
 ('12345678b', 'Irene', 'Garcia', 'Muñoz', 3000, '4%', 0, 3, 'MAD', ''),
 ('12345678c', 'Ana', 'Ibañez', 'Herrera', 5000, '3%', 0, 3, 'MAD', ''),
 ('12345678d', 'Sandra', 'Garcia', 'Ibañez', 3500, '5%', 0, 3, 'MAD', ''),
 ('12345678u', 'elena', 'alvarez', 'alvarez', 4500, '4%', 6000, 3, 'MAD', ''),
-('22222222b', 'Cristina ', 'García', 'Sánchez-Poves', 5900, '3%', 40000, 5, 'MAD', '/images/page2_img3.jpg'),
+('22222222b', 'Cristina ', 'García', 'Sánchez-Poves', 5900, '0.3', 40000, 5, 'MAD', '/images/page2_img3.jpg'),
 ('33333333c', 'rocio', 'gonzalez', 'perez', 5400, '5%', 40000, 1, 'MAD', ''),
-('44444444d', 'alejandro', 'esquivias', 'fernandez', 3000, '4%', 0, 2, 'MAD', ''),
+('44444444d', 'alejandro', 'esquivias', 'fernandez', 3000, '0.4', 0, 2, 'MAD', ''),
 ('55555555d', 'fernando', 'magdalena', NULL, 3000, '3%', 0, 4, 'MAD', ''),
 ('66666666f', 'pedro', 'alvarez', 'alvarez', 3000, '5%', 100, 5, 'MAD', ''),
 ('77777777', 'pablo', 'alvarez', NULL, 3333, '4%', 400, 4, 'MAD', ''),
@@ -269,7 +269,7 @@ INSERT INTO `Solicitud` (`id_solicitud`, `tipo`, `estado`, `DNI_empleado`) VALUE
 
 CREATE TABLE `Tarea` (
   `id_tarea` int(11) NOT NULL,
-  `nombre` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nombre` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `incidencias` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -288,7 +288,14 @@ INSERT INTO `Tarea` (`id_tarea`, `nombre`, `incidencias`) VALUES
 (9, 'limpieza de ventanas', ''),
 (10, 'reposicion de alimentos', ''),
 (11, 'calibracion de agujas', ''),
-(12, 'limpieza de suelos', '');
+(12, 'limpieza de suelos', ''),
+(13, 'revisar rodamiento (temperatura muy alta)', '1'),
+(14, 'arreglar filtro de aire (humedad baja)', '2'),
+(15, 'arreglar filtro de aire (humedad alta)', '3'),
+(16, 'revisar rodamiento (temperatura alta)', '4'),
+(24, 'temperatura de la válvula', '18'),
+(25, 'arreglar motor (presión baja)', '19'),
+(26, 'limpiar filtro de aire', '20');
 
 -- --------------------------------------------------------
 
@@ -314,7 +321,7 @@ CREATE TABLE `TieneAsignada` (
 
 INSERT INTO `TieneAsignada` (`DNI`, `hora_comienzo`, `id_tarea`, `descripcion`, `hora_completada`, `codigo_viaje`, `estado`, `id_tieneAsignada`, `comentario`) VALUES
 ('11111111a', '2018-03-30 00:00:00', 1, '', '0000-00-00 00:00:00', 0, 'incompleta', 1, ''),
-('11111111a', '2018-03-14 06:00:00', 4, '', '0000-00-00 00:00:00', 0, 'pendiente', 2, ''),
+('11111111a', '2018-03-14 06:00:00', 4, '', '0000-00-00 00:00:00', 0, 'completada', 2, ' el trabajo esta bien'),
 ('22222222b', '2018-04-18 00:00:00', 1, '', '0000-00-00 00:00:00', 1, 'pendiente', 8, ''),
 ('33333333c', '2018-04-18 00:00:00', 1, '', '0000-00-00 00:00:00', 2, 'cancelada', 9, ''),
 ('55555555d', '2018-03-31 00:00:00', 2, '', '0000-00-00 00:00:00', 2, 'realizada', 10, ''),
@@ -331,7 +338,8 @@ INSERT INTO `TieneAsignada` (`DNI`, `hora_comienzo`, `id_tarea`, `descripcion`, 
 ('12345678c', '2018-05-17 10:00:00', 11, '', '2018-05-17 12:00:00', 2, 'cancelada', 21, ''),
 ('12345678d', '2018-05-16 10:00:00', 9, '', '2018-05-16 13:00:00', 666, 'realizada', 22, ''),
 ('12345678d', '2018-05-16 08:00:00', 11, '', '2018-05-16 13:00:00', 202, 'incompleta', 23, 'falta aceite'),
-('12345678u', '2018-05-17 07:00:00', 10, '', '2018-05-17 11:00:00', 666, 'pendiente', 24, '');
+('12345678u', '2018-05-17 07:00:00', 10, '', '2018-05-17 11:00:00', 666, 'pendiente', 24, ''),
+('44444444d', '2018-09-09 00:00:00', 11, ' ', '2018-09-09 00:00:00', 0, 'pendiente', 25, ' ');
 
 -- --------------------------------------------------------
 
